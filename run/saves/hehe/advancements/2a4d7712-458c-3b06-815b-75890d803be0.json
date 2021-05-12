@@ -5,6 +5,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/tools/flint_and_steel": {
+    "criteria": {
+      "has_obsidian": "2021-05-12 12:25:36 -0400"
+    },
+    "done": true
+  },
   "minecraft:recipes/transportation/oak_boat": {
     "criteria": {
       "in_water": "2021-05-11 23:31:22 -0400"
@@ -23,9 +29,21 @@
     },
     "done": true
   },
+  "minecraft:adventure/root": {
+    "criteria": {
+      "killed_by_something": "2021-05-12 12:41:00 -0400"
+    },
+    "done": true
+  },
   "minecraft:recipes/transportation/jungle_boat": {
     "criteria": {
       "in_water": "2021-05-11 23:31:22 -0400"
+    },
+    "done": true
+  },
+  "minecraft:story/form_obsidian": {
+    "criteria": {
+      "obsidian": "2021-05-12 12:25:36 -0400"
     },
     "done": true
   },
@@ -35,9 +53,17 @@
     },
     "done": true
   },
+  "minecraft:recipes/decorations/enchanting_table": {
+    "criteria": {
+      "has_obsidian": "2021-05-12 12:25:36 -0400"
+    },
+    "done": true
+  },
   "minecraft:adventure/adventuring_time": {
     "criteria": {
       "minecraft:mushroom_fields": "2021-05-11 23:11:24 -0400",
+      "minecraft:forest": "2021-05-12 12:39:47 -0400",
+      "minecraft:beach": "2021-05-12 12:40:00 -0400",
       "minecraft:mushroom_field_shore": "2021-05-11 16:28:13 -0400"
     },
     "done": false

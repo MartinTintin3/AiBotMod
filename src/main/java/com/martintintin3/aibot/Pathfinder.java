@@ -94,6 +94,17 @@ public class Pathfinder {
                             case "north":
                                 lookDirection = 180f;
                                 if(!client.world.isAir(client.player.getBlockPos().north().up()) || (!client.world.isAir(client.player.getBlockPos().north()) && !client.world.isAir(client.player.getBlockPos().north().up(2)))) {
+                                    if(client.world.isAir(client.player.getBlockPos().west().up()) && !client.world.isAir(client.player.getBlockPos().east().up())) {
+                                        direction = Direction.WEST;
+                                        lookDirection = 90f;
+                                    } else if(!client.world.isAir(client.player.getBlockPos().west().up()) && client.world.isAir(client.player.getBlockPos().east().up())) {
+                                        direction = Direction.EAST;
+                                        lookDirection = 270f;
+                                    } else {
+                                        int chance = (int) Math.round(Math.random());
+                                        direction = chance == 1 ? Direction.WEST : Direction.EAST;
+                                        lookDirection = chance == 1 ? 90f : 270f;
+                                    }
                                     direction = Direction.WEST;
                                     lookDirection = 90f;
                                 } else if(!client.world.isAir(client.player.getBlockPos().north())) {
