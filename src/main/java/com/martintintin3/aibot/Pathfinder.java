@@ -136,6 +136,7 @@ public class Pathfinder {
                         client.options.keyLeft.setPressed(false);
                         client.options.keyRight.setPressed(false);
                         client.options.keySneak.setPressed(false);
+                        break;
                 }
             }
         }
