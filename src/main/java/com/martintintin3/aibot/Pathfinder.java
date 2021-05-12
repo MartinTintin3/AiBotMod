@@ -1,6 +1,7 @@
 package com.martintintin3.aibot;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.MovementType;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.math.Direction;
@@ -17,11 +18,10 @@ public class Pathfinder {
     private static Boolean didCheck = false;
     private static enum AiType {
         ATTACK,
-        RUN_AWAY,
-        FORAGE,
-        NONE,
+        ESCAPE,
+
     }
-    private static List
+    public static Entity target = null;
 
     public static void start() {
         direction = client.player.getMovementDirection();
