@@ -16,11 +16,13 @@ public class Pathfinder {
     private static Direction direction;
     private static float lookDirection;
     private static Boolean didCheck = false;
-    private static enum AiType {
+    private static enum AiTypes {
         ATTACK,
         ESCAPE,
-
+        EXPLORE,
+        NONE
     }
+    private static AiTypes aiType = AiTypes.NONE;
     public static Entity target = null;
 
     public static void start() {
@@ -28,6 +30,7 @@ public class Pathfinder {
         client.player.sendMessage(new LiteralText("starting"), false);
         enabled = true;
         client.options.keyForward.setPressed(true);
+        aiType = AiTypes.EXPLORE;
     }
 
     public static void stop() {
@@ -39,6 +42,7 @@ public class Pathfinder {
         client.options.keySneak.setPressed(false);
         didCheck = false;
         enabled = false;
+        aiType = AiTypes.NONE;
     }
 
     public static void tick(MinecraftClient client) {
@@ -81,40 +85,58 @@ public class Pathfinder {
                     }
                 }
             } else {
-                switch (direction.asString()) {
-                    case "north":
-                        lookDirection = 180f;
-                        if(!client.world.isAir(client.player.getBlockPos().north())) {
-                            client.options.keyJump.setPressed(true);
-                        }
+                switch (aiType) {
+                    default:
+                        aiType = AiTypes.NONE;
                         break;
-                    case "south":
-                        lookDirection = 0f;
-                        if(!client.world.isAir(client.player.getBlockPos().south())) {
-                            client.options.keyJump.setPressed(true);
+                    case EXPLORE:
+                        switch (direction.asString()) {
+                            case "north":
+                                lookDirection = 180f;
+                                if(!client.world.isAir(client.player.getBlockPos().north().up()) || (!client.world.isAir(client.player.getBlockPos().north()) && !client.world.isAir(client.player.getBlockPos().north().up(2)))) {
+                                    direction = Direction.WEST;
+                                    lookDirection = 90f;
+                                } else if(!client.world.isAir(client.player.getBlockPos().north())) {
+                                    client.options.keyJump.setPressed(true);
+                                }
+                                break;
+                            case "south":
+                                lookDirection = 0f;
+                                if(!client.world.isAir(client.player.getBlockPos().south().up()) || (!client.world.isAir(client.player.getBlockPos().south()) && !client.world.isAir(client.player.getBlockPos().south().up(2)))) {
+                                    direction = Direction.EAST;
+                                    lookDirection = 270f;
+                                } else if(!client.world.isAir(client.player.getBlockPos().south())) {
+                                    client.options.keyJump.setPressed(true);
+                                }
+                                break;
+                            case "east":
+                                lookDirection = 270f;
+                                if(!client.world.isAir(client.player.getBlockPos().east().up()) || (!client.world.isAir(client.player.getBlockPos().east()) && !client.world.isAir(client.player.getBlockPos().east().up(2)))) {
+                                    direction = Direction.NORTH;
+                                    lookDirection = 180f;
+                                } else if(!client.world.isAir(client.player.getBlockPos().east())) {
+                                    client.options.keyJump.setPressed(true);
+                                }
+                                break;
+                            case "west":
+                                lookDirection = 90f;
+                                if(!client.world.isAir(client.player.getBlockPos().west().up()) || (!client.world.isAir(client.player.getBlockPos().west()) && !client.world.isAir(client.player.getBlockPos().west().up(2)))) {
+                                    direction = Direction.SOUTH;
+                                    lookDirection = 0f;
+                                } else if(!client.world.isAir(client.player.getBlockPos().west())) {
+                                    client.options.keyJump.setPressed(true);
+                                }
+                                break;
                         }
-                        break;
-                    case "east":
-                        lookDirection = 270f;
-                        if(!client.world.isAir(client.player.getBlockPos().east())) {
-                            client.options.keyJump.setPressed(true);
-                        }
-                        break;
-                    case "west":
-                        lookDirection = 90f;
-                        if(!client.world.isAir(client.player.getBlockPos().west())) {
-                            client.options.keyJump.setPressed(true);
-                        }
-                        break;
+
+                        client.player.updatePositionAndAngles(client.player.getX(), client.player.getY(), client.player.getZ(), lookDirection, client.player.getPitch(client.getTickDelta()));
+
+                        client.options.keyForward.setPressed(true);
+                        client.options.keyBack.setPressed(false);
+                        client.options.keyLeft.setPressed(false);
+                        client.options.keyRight.setPressed(false);
+                        client.options.keySneak.setPressed(false);
                 }
-
-                client.player.updatePositionAndAngles(client.player.getX(), client.player.getY(), client.player.getZ(), lookDirection, client.player.getPitch(client.getTickDelta()));
-
-                client.options.keyForward.setPressed(true);
-                client.options.keyBack.setPressed(false);
-                client.options.keyLeft.setPressed(false);
-                client.options.keyRight.setPressed(false);
-                client.options.keySneak.setPressed(false);
             }
         }
     }
