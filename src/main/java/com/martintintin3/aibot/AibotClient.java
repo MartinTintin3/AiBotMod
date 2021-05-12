@@ -30,6 +30,6 @@ public class AibotClient implements ClientModInitializer {
                 "category.aibot.aibot"
         ));
 
-        ClientTickEvents.START_CLIENT_TICK.register(Pathfinder::tick);
+        ClientTickEvents.START_CLIENT_TICK.register(Brain::tick);
     }
 }

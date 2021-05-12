@@ -1,5 +1,6 @@
 package com.martintintin3.aibot;
 
+import com.martintintin3.aibot.enums.AiType;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.text.LiteralText;
@@ -9,21 +10,14 @@ import net.minecraft.util.math.Vec3d;
 
 import java.util.List;
 
-public class Pathfinder {
+public class Brain {
     private static Boolean enabled = false;
     private static MinecraftClient client;
     private static Vec3d startPosition;
     private static Direction direction;
     private static float lookDirection;
     private static Boolean didCheck = false;
-    private static enum AiTypes {
-        ATTACK,
-        ESCAPE,
-        EXPLORE,
-        NONE
-    }
-
-    private static AiTypes aiType = AiTypes.NONE;
+    private static AiType aiType = AiType.NONE;
     public static Entity target = null;
 
     public static void start() {
@@ -31,7 +25,7 @@ public class Pathfinder {
         client.player.sendMessage(new LiteralText("starting"), false);
         enabled = true;
         client.options.keyForward.setPressed(true);
-        aiType = AiTypes.EXPLORE;
+        aiType = AiType.EXPLORE;
     }
 
     public static void stop() {
@@ -44,12 +38,12 @@ public class Pathfinder {
         client.options.keyJump.setPressed(false);
         didCheck = false;
         enabled = false;
-        aiType = AiTypes.NONE;
+        aiType = AiType.NONE;
     }
 
     public static void tick(MinecraftClient client) {
         if(client.player == null) return;
-        Pathfinder.client = client;
+        Brain.client = client;
         if(!AibotClient.startKeybind.isPressed() || !AibotClient.stopKeybind.isPressed()) {
             if(AibotClient.startKeybind.isPressed() && !enabled) {
                 start();
@@ -93,7 +87,7 @@ public class Pathfinder {
 
             switch (aiType) {
                 default:
-                    aiType = AiTypes.NONE;
+                    aiType = AiType.NONE;
                     break;
                 case EXPLORE:
                     switch (direction.asString()) {
