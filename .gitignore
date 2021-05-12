@@ -1,2 +1,10 @@
+# Build files
 run
 build
+.gradle
+
+# Stupid DS_Store
+.DS_Store
+DS_Store
+**/DS_Store
+**/**/DS_Store
