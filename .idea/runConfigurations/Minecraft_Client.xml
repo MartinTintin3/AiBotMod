@@ -3,7 +3,7 @@
     <option name="ALTERNATIVE_JRE_PATH" value="/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="MAIN_CLASS_NAME" value="net.fabricmc.devlaunchinjector.Main" />
-    <module name="AiBot.main" />
+    <module name="AiBotMod.main" />
     <option name="PROGRAM_PARAMETERS" value="--username MartinTintin" />
     <option name="VM_PARAMETERS" value="-Dfabric.dli.config=$PROJECT_DIR$/.gradle/loom-cache/launch.cfg -Dfabric.dli.env=client -XstartOnFirstThread -Dfabric.dli.main=net.fabricmc.loader.launch.knot.KnotClient" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/run/" />
