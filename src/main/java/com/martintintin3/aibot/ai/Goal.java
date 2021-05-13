@@ -5,21 +5,21 @@ import net.minecraft.client.MinecraftClient;
 
 public class Goal {
     public final GoalType type;
-    private Boolean enabled = false;
+    private Boolean finished = false;
 
     public Goal(GoalType type) {
         this.type = type;
     }
 
-    public void start() {
-        this.enabled = true;
+    public void setup() {};
+
+    public Boolean isFinished() {
+        return this.finished;
     }
 
-    public void stop() {
-        this.enabled = false;
+    public void setFinished(Boolean finished) {
+        this.finished = finished;
     }
 
-    public void tick(MinecraftClient client) {
-
-    }
+    public void tick(MinecraftClient client) { }
 }

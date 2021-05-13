@@ -1,16 +1,18 @@
 package com.martintintin3.aibot.ai;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.text.LiteralText;
+
+import java.nio.file.Path;
 
 public class Brain {
     private static Boolean enabled = false;
     private static MinecraftClient client;
     private static Integer jumpAmount = 0;
-
+    private static Goal currentGoal;
 
     public static void enable() {
         enabled = true;
-        jumpAmount = 1;
     }
 
     public static void disable() {
@@ -23,20 +25,30 @@ public class Brain {
 
     public static void tick(MinecraftClient client) {
         Brain.client = client;
+        Pathfinder.tick(client);
 
         if(enabled) {
             disableMovementKeys();
 
             // Check if jump is needed
-            if(jumpAmount > 0) {
+            if(jumpAmount > 0 && client.player.getVelocity().y > -0.079f && client.player.getVelocity().y <= -0.078f) {
                 client.options.keyJump.setPressed(true);
                 jumpAmount--;
+            }
+
+            if(currentGoal != null) {
+                if(currentGoal.isFinished()) {
+                    client.player.sendMessage(new LiteralText("Goal " + currentGoal.type.toString() + " finished"), false);
+                    currentGoal = null;
+                } else {
+                    currentGoal.tick(client);
+                }
             }
         }
     }
 
     private static void jump() {
-        jumpAmount = 1;
+        jumpAmount++;
     }
 
     private static void disableMovementKeys() {
