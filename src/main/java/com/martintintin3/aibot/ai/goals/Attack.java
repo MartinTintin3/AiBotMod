@@ -24,7 +24,7 @@ public class Attack extends Goal {
     }
 
     public void tick(MinecraftClient client) {
-        if(client.player.distanceTo(this.target) > 2) {
+        if(client.player.distanceTo(this.target) > 2.5) {
             Integer distance = 0;
             while(this.client.world.isAir(this.target.getBlockPos().down(distance))) {
                 distance++;
