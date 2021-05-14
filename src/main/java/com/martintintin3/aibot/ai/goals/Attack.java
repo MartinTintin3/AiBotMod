@@ -1,6 +1,7 @@
 package com.martintintin3.aibot.ai.goals;
 
 import com.martintintin3.aibot.ai.Goal;
+import com.martintintin3.aibot.ai.GoalManager;
 import com.martintintin3.aibot.ai.Pathfinder;
 import com.martintintin3.aibot.enums.GoalType;
 import net.minecraft.client.MinecraftClient;
@@ -8,18 +9,16 @@ import net.minecraft.entity.Entity;
 
 public class Attack extends Goal {
     private final Entity target;
-    private MinecraftClient client;
 
     public Attack(GoalType type, MinecraftClient client, Entity target) {
-        super(type);
+        super(type, client);
         this.target = target;
-        this.client = client;
     }
 
     @Override
     public void setup() {
         if(this.client.player.distanceTo(this.target) > 2) {
-            Pathfinder.enable(this.target.getBlockPos().down());
+            Pathfinder.enable();
         }
     }
 
@@ -32,7 +31,7 @@ public class Attack extends Goal {
             Pathfinder.setTargetBlock(this.target.getBlockPos().down(distance));
         } else {
             client.player.attack(this.target);
-            this.setFinished(true);
+            GoalManager.removeGoal(this);
         }
     }
 }
