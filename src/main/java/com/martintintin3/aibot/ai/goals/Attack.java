@@ -31,7 +31,7 @@ public class Attack extends Goal {
             Pathfinder.setTargetBlock(this.target.getBlockPos().down(distance));
         } else {
             client.player.attack(this.target);
-            GoalManager.removeGoal(this);
+            this.delete();
         }
     }
 }
