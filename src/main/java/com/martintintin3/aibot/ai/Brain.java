@@ -21,7 +21,6 @@ public class Brain {
 
     public static void tick(MinecraftClient client) {
         Brain.client = client;
-        Pathfinder.tick(client);
 
         if(enabled) {
             disableMovementKeys();
@@ -33,6 +32,7 @@ public class Brain {
             }
 
             GoalManager.tick(client);
+            Pathfinder.tick(client);
         }
     }
 
