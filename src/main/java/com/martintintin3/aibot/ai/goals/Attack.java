@@ -22,6 +22,7 @@ public class Attack extends Goal {
         }
     }
 
+    @Override
     public void tick(MinecraftClient client) {
         if(client.player.distanceTo(this.target) > 2.5) {
             Integer distance = 0;
