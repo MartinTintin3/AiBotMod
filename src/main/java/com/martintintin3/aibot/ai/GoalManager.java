@@ -15,6 +15,10 @@ public class GoalManager {
 
     }
 
+    public static Boolean cointainsGoal(Goal goal) {
+        return goalQueue.contains(goal);
+    }
+
     public static void tick(MinecraftClient client) {
         if(goalQueue.stream().anyMatch(goal -> !goal.isPaused())) {
             goalQueue.stream().filter(goal -> !goal.isPaused()).findFirst().get().tick(client);
