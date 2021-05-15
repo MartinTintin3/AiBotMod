@@ -14,4 +14,5 @@
   <component name="McpModuleSettings">
     <option name="srgType" value="SRG" />
   </component>
+  <component name="TestModuleProperties" production-module="AiBotMod.main" />
 </module>
