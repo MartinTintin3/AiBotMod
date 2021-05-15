@@ -1,11 +1,7 @@
 <component name="libraryTable">
   <library name="baritone-api-fabric-1.6.3">
     <CLASSES>
-<<<<<<< HEAD
       <root url="jar://$PROJECT_DIR$/baritone-api-fabric-1.6.3.jar!/" />
-=======
-      <root url="jar://$USER_HOME$/Downloads/baritone-api-fabric-1.6.3.jar!/" />
->>>>>>> parent of bb05fa3... Added Baritone(A pathfinding API)
     </CLASSES>
     <JAVADOC />
     <SOURCES />
